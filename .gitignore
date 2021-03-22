@@ -1,3 +1,5 @@
 __pycache__
 .vscode
 jupyter_rdfify.egg-info
+dist
+build

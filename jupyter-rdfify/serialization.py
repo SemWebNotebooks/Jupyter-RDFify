@@ -7,7 +7,7 @@ from .table import graph_spo_iterator, html_table
 from .util import strip_comments
 
 displays = ["graph", "table", "raw", "none"]
-formats = ["turtle", "json-ld", "xml"]
+formats = ["turtle", "json-ld", "xml", "n3"]
 
 
 class SerializationModule(RDFModule):

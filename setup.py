@@ -19,7 +19,6 @@ setuptools.setup(
         "ipython>=7.18.0",
         "graphviz",
         "sparqlwrapper",
-        "requests",
         "owlrl",
         "PyShEx"
     ],
