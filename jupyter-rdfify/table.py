@@ -85,7 +85,7 @@ def html_table(row_iter):
     res += html_table_row(next(row_iter), True)
     for row in row_iter:
         res += html_table_row(row)
-    return res
+    return res + "</table>"
 
 
 def html_table_row(row, header=False):
