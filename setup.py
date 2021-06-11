@@ -11,7 +11,7 @@ setuptools.setup(
     description="IPython Extension for semantic web technology support (Turtle, SPARQL, ShEx, etc.)",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://git.rwth-aachen.de/i5/teaching/jupyter-rdfify",
+    url="https://github.com/SemWebNotebooks/Jupyter-RDFify",
     packages=setuptools.find_packages(),
     install_requires=[
         "rdflib",

@@ -1,4 +1,5 @@
 # Jupyter-RDFify
+[![PyPI](https://img.shields.io/pypi/v/jupyter-rdfify)](https://pypi.org/project/jupyter-rdfify/)
 ![Cells showing Jupyter-RDFify features](img/cells.png)  
 IPython Extension for semantic web technology support (Turtle, SPARQL, ShEx, etc.)
 
