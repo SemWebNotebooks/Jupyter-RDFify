@@ -20,7 +20,7 @@ python -m pip install jupyter-rdfify
 ## Install from Source using Pip
 
 ```
-python -m pip install git+https://github.com/lapie1/Jupyter-RDFify
+python -m pip install git+https://github.com/SemWebNotebooks/Jupyter-RDFify
 ```
 
 ## Dependencies
