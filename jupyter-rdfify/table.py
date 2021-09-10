@@ -22,14 +22,14 @@ def display_table(body, mime, logger):
 
 def xml_row_iterator(elem):
     """Iterates a Sparql xml result (http://www.w3.org/2005/sparql-results#) by rows. First result are the column headers."""
-    ns = {"": "http://www.w3.org/2005/sparql-results#"}
+    ns = {"sparql": "http://www.w3.org/2005/sparql-results#"}
     headers = []
-    for head in elem.findall("head/variable", ns):
+    for head in elem.findall("sparql:head/sparql:variable", ns):
         headers.append(head.attrib["name"])
     yield headers
-    for result in elem.findall("results/result", ns):
+    for result in elem.findall("sparql:results/sparql:result", ns):
         row = []
-        for binding in result.findall("binding", ns):
+        for binding in result.findall("sparql:binding", ns):
             n = binding[0]
             if n.tag == "{http://www.w3.org/2005/sparql-results#}literal":
                 lang = n.get("{http://www.w3.org/XML/1998/namespace}lang")

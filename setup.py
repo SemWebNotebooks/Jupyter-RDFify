@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="jupyter-rdfify",
-    version="1.0.1",
+    version="1.0.2",
     author="Lars Pieschel",
     author_email="lars.pieschel@rwth-aachen.de",
     description="IPython Extension for semantic web technology support (Turtle, SPARQL, ShEx, etc.)",

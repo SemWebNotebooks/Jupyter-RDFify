@@ -1,4 +1,4 @@
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 
 from IPython.display import display_javascript
 from .jupyter_rdf import JupyterRDF
