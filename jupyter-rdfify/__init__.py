@@ -1,10 +1,10 @@
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 
 from IPython.display import display_javascript
 from .jupyter_rdf import JupyterRDF
 from .serialization import SerializationModule
 from .sparql import SPARQLModule
-from .shex import ShexModule
+#from .shex import ShexModule
 from .graph_manager import GraphManagerModule
 
 
