@@ -39,7 +39,8 @@ def load_ipython_extension(ipython):
         SerializationModule, "xml", "XML+RDF module", "XML+RDF")
     jupyter_rdf.register_module(
         SPARQLModule, "sparql", "SPARQL module", "SPARQL")
-    jupyter_rdf.register_module(ShexModule, "shex", "ShEx module", "ShEx")
+    # ShEx support dropped as PyShEx is incompatible with RDFLib 6.0.0 and upwards
+    # jupyter_rdf.register_module(ShexModule, "shex", "ShEx module", "ShEx")
     jupyter_rdf.register_module(
         GraphManagerModule, "graph", "Graph management module", "Graphman")
     ipython.register_magics(jupyter_rdf)

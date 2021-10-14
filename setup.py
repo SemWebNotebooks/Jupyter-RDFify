@@ -18,8 +18,7 @@ setuptools.setup(
         "ipython>=7.0.0",
         "graphviz",
         "sparqlwrapper>=1.8.5",
-        "owlrl",
-        "PyShEx>=0.7.20"
+        "owlrl"
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

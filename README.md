@@ -5,6 +5,12 @@ IPython Extension for semantic web technology support (Turtle, SPARQL, ShEx, etc
 
 This extension is meant to be used together with Jupyter Notebooks for educational purposes. Its focus is neither performance nor scalability but instead ease-of-use.
 
+# Info concerning PyShEx
+
+Sadly, PyShEx is not supported by RDFLib 6.0.0 and upwards. Therefore, we will drop ShEx support until either PyShEx is updated or integrated into RDFLib or there is an alternative for PyShEx.
+
+I'm currently working on a SHACL implementation as alternative.
+
 # Teaching Semantic Web Technologies with Jupyter-RDFify
 
 Jupyter-RDFify was developed by the [Chair of Information Systems at RWTH Aachen University](http://dbis.rwth-aachen.de/) to support interactive teaching of Semantic Web Technologies. You can find an examplary set of tutorial-like Jupyter Notebooks using Jupyter-RDFify at https://github.com/SemWebNotebooks/Notebooks/tree/main/Notebooks and further information on how to teach Semantic Web Technologies with Jupyter Notebooks, Jupyter-RDFify, the Moodle elearning system and automatic grading at https://github.com/SemWebNotebooks/Notebooks.
@@ -134,6 +140,8 @@ SELECT ?x WHERE {
 ```
 
 ## ShEx Submodule
+
+ShEx support has been dropped since version 1.0.2. Please read the notice at the top.
 
 With this submodule, you can validate graphs using the [ShEx](https://shex.io/) language. You first need to parse a schema:
 
