@@ -15,7 +15,6 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=[
         "rdflib",
-        "rdflib-jsonld",
         "ipython>=7.0.0",
         "graphviz",
         "sparqlwrapper",
