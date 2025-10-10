@@ -1,10 +1,9 @@
-__version__ = '1.0.4'
+__version__ = '1.0.2'
 
 from IPython.display import display_javascript
 from .jupyter_rdf import JupyterRDF
 from .serialization import SerializationModule
 from .sparql import SPARQLModule
-from .shex import ShexModule
 from .graph_manager import GraphManagerModule
 
 
@@ -15,7 +14,7 @@ def load_ipython_extension(ipython):
     js_highlight = """
     if (typeof IPython !== "undefined") {
         IPython.CodeCell.options_default.highlight_modes['application/sparql-query'] = {'reg':[/^%%rdf sparql/]};
-        IPython.CodeCell.options_default.highlight_modes['text/turtle'] = {'reg':[/^%%rdf turtle/, /^%%rdf shex/]};
+        IPython.CodeCell.options_default.highlight_modes['text/turtle'] = {'reg':[/^%%rdf turtle/]};
         IPython.CodeCell.options_default.highlight_modes['application/ld+json'] = {'reg':[/^%%rdf json-ld/]};
         IPython.notebook.get_cells().map(function(cell){ if (cell.cell_type == 'code'){ cell.auto_highlight(); } });
     }
@@ -39,7 +38,6 @@ def load_ipython_extension(ipython):
         SerializationModule, "xml", "XML+RDF module", "XML+RDF")
     jupyter_rdf.register_module(
         SPARQLModule, "sparql", "SPARQL module", "SPARQL")
-    jupyter_rdf.register_module(ShexModule, "shex", "ShEx module", "ShEx")
     jupyter_rdf.register_module(
         GraphManagerModule, "graph", "Graph management module", "Graphman")
     ipython.register_magics(jupyter_rdf)

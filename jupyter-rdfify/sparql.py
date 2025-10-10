@@ -1,17 +1,31 @@
 from IPython.display import display, display_pretty
 from SPARQLWrapper import SPARQLWrapper
-from cgi import parse_header
 
 from .rdf_module import RDFModule
 from .graph import parse_graph, draw_graph
 from .table import display_table, html_table
+
+def parse_header(line):
+    """Replacement for cgi.parse_header"""
+    parts = line.split(';')
+    main_type = parts[0].strip()
+    pdict = {}
+    for p in parts[1:]:
+        if '=' in p:
+            name, value = p.split('=', 1)
+            name = name.strip().lower()
+            value = value.strip()
+            if value.startswith('"') and value.endswith('"'):
+                value = value[1:-1]
+            pdict[name] = value
+    return main_type, pdict
 
 
 formats = ["xml", "json"]
 displays = ["graph", "table", "raw", "none"]
 mime_types = {
     "application/sparql-results+xml": ["table"],
-    "application/rdf+xml": ["table", "graph"],
+    "application/rdf+xml": ["graph", "table"],
     "application/xml": [],
     "application/sparql-results+json": ["table"],
 }
@@ -36,6 +50,7 @@ class SPARQLModule(RDFModule):
         self.wrapper = None
 
     def query(self, query, params):
+        self.log(params)
         if params.endpoint is not None:
             self.wrapper = SPARQLWrapper(params.endpoint)
         if self.wrapper is not None:
@@ -68,6 +83,8 @@ Requested: '{params.format}', Response: '{result._get_responseFormat()}'
             elif res.type == "ASK":
                 self.logger.print(res.askAnswer)
             elif res.type == "CONSTRUCT":
+                draw_graph(res.graph, self.logger)
+            elif res.type == "DESCRIBE":
                 draw_graph(res.graph, self.logger)
             return res
         except Exception as e:
