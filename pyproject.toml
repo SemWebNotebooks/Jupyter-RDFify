@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rwth-jupyter-rdfify"
-version = "1.3"
+version = "1.3.1"
 authors = [
      { name = "Lars Pieschel"},
     { name = "Md. Rezaul Karim"},
@@ -28,6 +28,9 @@ dependencies = [
     "PyShEx",
     "owlrl",
 ]
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["rwth_jupyter_rdfify*"]
 
 [project.urls]
 Homepage = "https://github.com/SemWebNotebooks/Jupyter-RDFify"
