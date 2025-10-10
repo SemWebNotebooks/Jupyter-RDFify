@@ -30,5 +30,5 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://git.rwth-aachen.de/i5/teaching/jupyter-rdfify"
+Homepage = "https://github.com/SemWebNotebooks/Jupyter-RDFify"
 
