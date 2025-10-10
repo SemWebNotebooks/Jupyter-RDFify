@@ -1,5 +1,6 @@
 # Jupyter-RDFify
-[![PyPI](https://img.shields.io/pypi/v/jupyter-rdfify)](https://pypi.org/project/jupyter-rdfify/)
+[![PyPI](https://img.shields.io/pypi/v/rwth-jupyter-rdfify)](https://pypi.org/project/rwth-jupyter-rdfify/)
+**Note:** With Version 1.2, the package name is moved to rwth-jupyter-rdfify!
 ![Cells showing Jupyter-RDFify features](img/cells.png)  
 IPython Extension for semantic web technology support (Turtle, SPARQL, ShEx, etc.)
 
@@ -20,7 +21,7 @@ You may get this deprecation warning when loading the extension. This is the fau
 ## Install using Pip
 
 ```
-python -m pip install jupyter-rdfify
+python -m pip install rwth-jupyter-rdfify
 ```
 
 ## Install from Source using Pip
@@ -46,7 +47,7 @@ conda install -c conda-forge graphviz
 You first need to use the predefined `%load_ext` or `%reload_ext` magic to load Jupyter-RDFify. You need to do this each time your kernel is restarted.
 
 ```
-%load_ext jupyter-rdfify
+%load_ext rwth-jupyter-rdfify
 ```
 
 If you've installed the extension correctly, this should register the `%rdf` magic. This magic is special in that it is interpreted like a command line interface. If at any point you're wondering what arguments there are and what they do, do not hesitate to use the --help or -h flag.
