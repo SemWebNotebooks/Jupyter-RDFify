@@ -1,5 +1,6 @@
 # Jupyter-RDFify
 [![PyPI](https://img.shields.io/pypi/v/rwth-jupyter-rdfify)](https://pypi.org/project/rwth-jupyter-rdfify/)
+
 **Note:** With Version 1.2, the package name is moved to rwth-jupyter-rdfify!
 ![Cells showing Jupyter-RDFify features](img/cells.png)  
 IPython Extension for semantic web technology support (Turtle, SPARQL, ShEx, etc.)
@@ -168,9 +169,14 @@ To download the FOAF ontology and store it with the label "test" you can use the
 ```
 
 It also allows to persistently store graphs to the disk. For example, with this magic line command you can store the graph "test" in Turtle format to the file "test.ttl":
-"""
+```
 %rdf persistence --save test.ttl --format turtle --label test
-"""
+```
+
+And with this command you could load it again from disk:
+```
+%rdf 
+```
 
 ## Other Features
 
