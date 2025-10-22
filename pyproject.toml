@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rwth-jupyter-rdfify"
-version = "1.3.1"
+version = "1.4"
 authors = [
      { name = "Lars Pieschel"},
     { name = "Md. Rezaul Karim"},
@@ -12,7 +12,7 @@ authors = [
 ]
 description = "IPython Extension for semantic web technology support (Turtle, SPARQL, etc.)"
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = ">=3.13"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",

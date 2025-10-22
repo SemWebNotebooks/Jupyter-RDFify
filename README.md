@@ -159,6 +159,18 @@ To validate a graph, we need to provide the schema label (```--label```), the gr
 ```
 %rdf shex validate --label awesome_schema --graph awesome_graph --start http://example.org/AwesomeShape --focus http://example.org/JupyterRDF
 ```
+## Persistence Submodule
+
+The persistence submodule allows you to load graph from both local and remote source.
+To download the FOAF ontology and store it with the label "test" you can use the following command:
+```
+%rdf persistence --download http://xmlns.com/foaf/spec/ --format xml --label test
+```
+
+It also allows to persistently store graphs to the disk. For example, with this magic line command you can store the graph "test" in Turtle format to the file "test.ttl":
+"""
+%rdf persistence --save test.ttl --format turtle --label test
+"""
 
 ## Other Features
 

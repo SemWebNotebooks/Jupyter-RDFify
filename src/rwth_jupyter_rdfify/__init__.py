@@ -5,6 +5,7 @@ from .jupyter_rdf import JupyterRDF
 from .serialization import SerializationModule
 from .sparql import SPARQLModule
 from .graph_manager import GraphManagerModule
+from .persistence import PersistenceModule
 
 
 def load_ipython_extension(ipython):
@@ -40,4 +41,6 @@ def load_ipython_extension(ipython):
         SPARQLModule, "sparql", "SPARQL module", "SPARQL")
     jupyter_rdf.register_module(
         GraphManagerModule, "graph", "Graph management module", "Graphman")
+    jupyter_rdf.register_module(
+        PersistenceModule, "persistence", "Persistence module", "Persistence")
     ipython.register_magics(jupyter_rdf)
