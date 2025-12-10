@@ -160,6 +160,14 @@ To validate a graph, we need to provide the schema label (```--label```), the gr
 ```
 %rdf shex validate --label awesome_schema --graph awesome_graph --start http://example.org/AwesomeShape --focus http://example.org/JupyterRDF
 ```
+## SHACL Validation Submodule
+
+The SHACL validation submodule allows you to validate RDF graphs against SHACL shapes. After parsing both a data graph and a shapes graph with labels, you can validate them:
+
+```
+%rdf shaclvalidate --data-graph my_data --shapes-graph my_shapes
+```
+
 ## Persistence Submodule
 
 The persistence submodule allows you to load graph from both local and remote source.

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rwth-jupyter-rdfify"
-version = "1.4"
+version = "1.5"
 authors = [
      { name = "Lars Pieschel"},
     { name = "Md. Rezaul Karim"},
@@ -27,6 +27,7 @@ dependencies = [
     "sparqlslurper~=0.4",
     "PyShEx",
     "owlrl",
+    "pyshacl>=0.24.0",
 ]
 [tool.setuptools.packages.find]
 where = ["src"]
