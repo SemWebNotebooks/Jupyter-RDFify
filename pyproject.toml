@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rwth-jupyter-rdfify"
-version = "1.5"
+version = "1.5.1"
 authors = [
      { name = "Lars Pieschel"},
     { name = "Md. Rezaul Karim"},

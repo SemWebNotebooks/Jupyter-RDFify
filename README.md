@@ -178,7 +178,7 @@ To download the FOAF ontology and store it with the label "test" you can use the
 
 It also allows to persistently store graphs to the disk. For example, with this magic line command you can store the graph "test" in Turtle format to the file "test.ttl":
 ```
-%rdf persistence --save test.ttl --format turtle --label test
+%rdf persistence --save --output test.ttl --format turtle --label test
 ```
 
 And with this command you could load it again from disk:

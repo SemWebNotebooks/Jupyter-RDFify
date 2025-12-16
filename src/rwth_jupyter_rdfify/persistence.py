@@ -14,7 +14,7 @@ class PersistenceModule(RDFModule):
         self.parser.add_argument(
             "--download", "-d", help="Download an RDF graph from a remote URL")
         self.parser.add_argument(
-            "--save", "-s", help="Save a graph to disk. Requires --label to specify which graph to save")
+            "--save", "-s", action="store_true", help="Save a graph to disk. Requires --label to specify which graph to save. Use --output to specify the output file or it will be generated from the label")
         self.parser.add_argument(
             "--label", help="Label to identify the graph (used for loading with --label or saving with --save)")
         self.parser.add_argument(
