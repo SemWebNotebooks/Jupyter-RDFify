@@ -1,0 +1,8 @@
+rdflib~=6.0
+ipython>=7.0.0
+graphviz
+sparqlwrapper>=1.8.5
+sparqlslurper~=0.4
+PyShEx
+owlrl
+pyshacl>=0.24.0

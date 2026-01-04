@@ -2,6 +2,7 @@
 from owlrl import DeductiveClosure, RDFS_Semantics, OWLRL_Semantics
 from .graph import draw_graph
 from .rdf_module import RDFModule
+from .prov import draw_provgraph
 
 
 class GraphManagerModule(RDFModule):
@@ -9,7 +10,7 @@ class GraphManagerModule(RDFModule):
     def __init__(self, name, parser, logger, description, displayname):
         super().__init__(name, parser, logger, description, displayname)
         self.parser.add_argument(
-            "action", choices=["list", "remove", "draw", "entail-rdfs", "entail-owl", "entail-rdfs+owl"], help="Action to perform")
+            "action", choices=["list", "remove", "draw", "prov", "entail-rdfs", "entail-owl", "entail-rdfs+owl"], help="Action to perform")
         self.parser.add_argument(
             "--label", "-l", help="Reference a local graph by label")
 
@@ -34,6 +35,10 @@ class GraphManagerModule(RDFModule):
                 if self.check_label(params.label, store):
                     draw_graph(store["rdfgraphs"]
                                [params.label], self.logger)
+            elif params.action == "prov":
+                if self.check_label(params.label, store):
+                    draw_provgraph(store["rdfgraphs"]
+                                   [params.label], self.logger)
             elif params.action == "remove":
                 if self.check_label(params.label, store):
                     del store["rdfgraphs"][params.label]

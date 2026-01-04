@@ -3,10 +3,11 @@ from IPython.display import display_pretty
 from owlrl import DeductiveClosure, RDFS_Semantics, OWLRL_Semantics
 from .rdf_module import RDFModule
 from .graph import parse_graph, draw_graph
+from .prov import draw_provgraph
 from .table import graph_spo_iterator, html_table
 from .util import strip_comments
 
-displays = ["graph", "table", "raw", "none"]
+displays = ["graph", "table", "raw", "none", "prov"]
 formats = ["turtle", "json-ld", "xml", "n3"]
 
 
@@ -58,6 +59,8 @@ class SerializationModule(RDFModule):
                     return
                 elif params.display == "graph":
                     draw_graph(g, self.logger)
+                elif params.display == "prov":
+                    draw_provgraph(g, self.logger)
                 elif params.display == "table":
                     self.logger.display_html(html_table(graph_spo_iterator(g)))
                 else:
