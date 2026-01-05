@@ -28,7 +28,7 @@ dependencies = [
     "PyShEx",
     "owlrl",
     "pyshacl>=0.24.0",
-    "prov",
+    "prov[rdf]",
 ]
 [tool.setuptools.packages.find]
 where = ["src"]
