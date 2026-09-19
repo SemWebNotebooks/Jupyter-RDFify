@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rwth-jupyter-rdfify"
-version = "1.6"
+version = "1.7"
 authors = [
      { name = "Lars Pieschel"},
     { name = "Md. Rezaul Karim"},
     { name= "Laurenz Neumann", email="laurenz.neumann@dbis.rwth-aachen.de"}
 ]
-description = "IPython Extension for semantic web technology support (Turtle, SPARQL, etc.)"
+description = "IPython Extension for semantic web technology support (Turtle, SPARQL, SHACL, etc.)"
 readme = "README.md"
 requires-python = ">=3.13"
 classifiers = [
@@ -20,15 +20,14 @@ classifiers = [
     "Framework :: IPython",
 ]
 dependencies = [
-    "rdflib~=6.0",
+    "rdflib>=6.0,<8",
     "ipython>=7.0.0",
     "graphviz",
     "sparqlwrapper>=1.8.5",
-    "sparqlslurper~=0.4",
-    "PyShEx",
     "owlrl",
     "pyshacl>=0.24.0",
-    "prov[rdf]",
+    "prov[rdf,dot]",
+    "requests",
 ]
 [tool.setuptools.packages.find]
 where = ["src"]

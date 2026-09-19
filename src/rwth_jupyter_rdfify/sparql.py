@@ -45,12 +45,12 @@ class SPARQLModule(RDFModule):
         grp.add_argument(
             "--local", "-l", help="Give a label of a local graph. This cell will then ignore the endpoint and query the graph instead")
         self.parser.add_argument(
-            "--store", "-s", help="Store result of the query with this label")
+            "--store", "-s", help="Store result of the query with this label (the graph of a local CONSTRUCT or DESCRIBE query also as a graph)")
         self.prefix = ""
         self.wrapper = None
 
     def query(self, query, params):
-        self.log(params)
+        self.log(params, verbose=True)
         if params.endpoint is not None:
             self.wrapper = SPARQLWrapper(params.endpoint)
         if self.wrapper is not None:
@@ -121,6 +121,9 @@ Requested: '{params.format}', Response: '{result._get_responseFormat()}'
                     if params.store is not None:
                         store["rdfresults"][params.store] = res
                         store["rdfsources"][params.store] = params.cell
+                        # a constructed graph can be queried, drawn or validated by its label
+                        if res is not None and res.type in ("CONSTRUCT", "DESCRIBE"):
+                            store["rdfgraphs"][params.store] = res.graph
                     store["rdfresults"]["last"] = res
                     store["rdfsources"]["last"] = params.cell
                 else:

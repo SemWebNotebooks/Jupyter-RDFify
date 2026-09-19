@@ -1,4 +1,9 @@
-__version__ = '1.0.2'
+from importlib.metadata import version as _version, PackageNotFoundError
+
+try:
+    __version__ = _version("rwth-jupyter-rdfify")
+except PackageNotFoundError:  # running from a source checkout
+    __version__ = "unknown"
 
 from IPython.display import display_javascript
 from .jupyter_rdf import JupyterRDF
