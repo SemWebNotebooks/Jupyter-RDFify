@@ -3,19 +3,13 @@
 
 **Note:** With Version 1.2, the package name is moved to rwth-jupyter-rdfify!
 ![Cells showing Jupyter-RDFify features](img/cells.png)  
-IPython Extension for semantic web technology support (Turtle, SPARQL, ShEx, etc.)
+IPython Extension for semantic web technology support (Turtle, SPARQL, SHACL, etc.)
 
 This extension is meant to be used together with Jupyter Notebooks for educational purposes. Its focus is neither performance nor scalability but instead ease-of-use.
 
 # Teaching Semantic Web Technologies with Jupyter-RDFify
 
 Jupyter-RDFify was developed by the [Chair of Information Systems at RWTH Aachen University](http://dbis.rwth-aachen.de/) to support interactive teaching of Semantic Web Technologies. You can find an examplary set of tutorial-like Jupyter Notebooks using Jupyter-RDFify at https://github.com/SemWebNotebooks/Notebooks/tree/main/Notebooks and further information on how to teach Semantic Web Technologies with Jupyter Notebooks, Jupyter-RDFify, the Moodle elearning system and automatic grading at https://github.com/SemWebNotebooks/Notebooks.
-
-# Information concerning rdflib-jsonld warning
-
-`DeprecationWarning: The rdflib-jsonld package has been integrated into rdflib as of rdflib==6.0.0.  Please remove rdflib-jsonld from your project's dependencies.`
-
-You may get this deprecation warning when loading the extension. This is the fault of SPARQLWrapper which jupyter-rdfify depends on. It will stop appearing as soon as SPARQLWrapper removes json-ld from its dependencies. You can safely ignore this warning.
 
 # Installation
 
@@ -45,10 +39,10 @@ conda install -c conda-forge graphviz
 
 ## Basic Usage
 
-You first need to use the predefined `%load_ext` or `%reload_ext` magic to load Jupyter-RDFify. You need to do this each time your kernel is restarted.
+You first need to use the predefined `%load_ext` or `%reload_ext` magic to load Jupyter-RDFify. You need to do this each time your kernel is restarted. Note that the module name uses underscores, while the package name on PyPI uses hyphens:
 
 ```
-%load_ext rwth-jupyter-rdfify
+%load_ext rwth_jupyter_rdfify
 ```
 
 If you've installed the extension correctly, this should register the `%rdf` magic. This magic is special in that it is interpreted like a command line interface. If at any point you're wondering what arguments there are and what they do, do not hesitate to use the --help or -h flag.
@@ -129,7 +123,7 @@ WHERE
 
 ### Query Local Graphs
 
-You can query [labelled](#Labelling) graphs using the ```--local <label>``` argument. Note that this overrides the endpoint argument.
+You can query [labelled](#Labelling) graphs using the ```--local <label>``` argument. Note that this overrides the endpoint argument. With ```--store <label>```, the graph a local CONSTRUCT or DESCRIBE query returns is stored under that label, so it can be queried, drawn or validated like a parsed graph.
 
 Example querying the above labelled graph:
 
@@ -141,32 +135,17 @@ SELECT ?x WHERE {
 }
 ```
 
-## ShEx Submodule
-
-With this submodule, you can validate graphs using the [ShEx](https://shex.io/) language. You first need to parse a schema:
-
-```shex
-%%rdf shex parse --label awesome_schema
-PREFIX : <http://example.org/>
-:AwesomeShape {
-    :is [:Awesome]
-}
-```
-
-We already gave the schema a [label](#Labelling) to reference it later. Note that graph labels and schema labels use different namespaces and do not overwrite each other.
-
-To validate a graph, we need to provide the schema label (```--label```), the graph label (```--graph```) of the graph we want to validate against the schema and at least a starting shape (```--start```). This will check every node of the graph against the starting shape. If we want to focus on a specific node in the graph, we can use the ```--focus``` argument. To validate the ```awesome_graph``` against the ```awesome_schema```, starting from the ```:AwesomeShape``` and focussing on the ```:JupyterRDF``` node:
-
-```
-%rdf shex validate --label awesome_schema --graph awesome_graph --start http://example.org/AwesomeShape --focus http://example.org/JupyterRDF
-```
 ## SHACL Validation Submodule
 
-The SHACL validation submodule allows you to validate RDF graphs against SHACL shapes. After parsing both a data graph and a shapes graph with labels, you can validate them:
+The SHACL validation submodule allows you to validate RDF graphs against SHACL shapes with [pySHACL](https://github.com/RDFLib/pySHACL). After parsing both a data graph and a shapes graph with labels, you can validate them:
 
 ```
 %rdf shaclvalidate --data-graph my_data --shapes-graph my_shapes
 ```
+
+The data graph is validated together with its RDFS closure (pySHACL's `inference="rdfs"`). If the data does not conform, the report is stored as a graph with the label `validation_report_<data label>`.
+
+(Earlier versions of Jupyter-RDFify had a ShEx submodule. It was removed in version 1.2; use SHACL for validation.)
 
 ## Persistence Submodule
 
@@ -183,23 +162,23 @@ It also allows to persistently store graphs to the disk. For example, with this 
 
 And with this command you could load it again from disk:
 ```
-%rdf 
+%rdf persistence --load test.ttl --format turtle --label test
 ```
 
 ## Other Features
 
 ### Prefixes
-As many of the languages/formats use prefix declarations and these usually just distract from the actual task, most submodules lets you outsource them. Using either the ```--prefix``` flag or the ```prefix``` action (only for ShEx submodule), you can define a string which gets prepend to every cell magic of that submodule. A simple example for Turtle which defines some very frequent prefixes:
+As many of the languages/formats use prefix declarations and these usually just distract from the actual task, most submodules let you outsource them. Using the ```--prefix``` flag, you can define a string which gets prepended to every cell magic of that submodule. A simple example for Turtle which defines some very frequent prefixes:
 
 ```turtle
-%rdf turtle --prefix
+%%rdf turtle --prefix
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 ```
 
 ### Graph Manager
-The graph manager submodule lets you list, draw, entail and delete labelled graphs. You just need to specify the action and usually a graph label. To draw or ```awesome_graph```:
+The graph manager submodule lets you list, draw, entail and delete labelled graphs. You just need to specify the action and usually a graph label. To draw ```awesome_graph```:
 
 ```
 %rdf graph draw --label awesome_graph
@@ -219,10 +198,11 @@ For now you can only entail graphs in-place. Possible values for &lt;regime&gt;:
 
 Note that these dependencies will be installed automatically if you use Pip.
 
-[RDFLib](https://rdflib.readthedocs.io/en/stable/): The heart of this extension  
-[RDFLib-jsonld](https://github.com/RDFLib/rdflib-jsonld): Extension of RDFLib for JSON-LD  
+[RDFLib](https://rdflib.readthedocs.io/en/stable/) (6 or 7): The heart of this extension, including JSON-LD  
 [SPARQLWrapper](https://github.com/RDFLib/sparqlwrapper): Extension of RDFLib for SPARQL  
 [OWL-RL](https://owl-rl.readthedocs.io/en/latest/): Library for RDFS and OWL-RL entailment  
-[PyShEx](https://github.com/hsolbrig/PyShEx): Implementation of ShEx  
+[pySHACL](https://github.com/RDFLib/pySHACL): SHACL validation  
+[prov](https://github.com/trungdong/prov) (with its RDF and dot extras): PROV documents and their drawing  
 [Graphviz python wrapper](https://pypi.org/project/graphviz/)  
+[Requests](https://requests.readthedocs.io/): Downloads for the persistence submodule  
 [IPython](https://ipython.org/)

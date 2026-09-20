@@ -42,7 +42,13 @@ def draw_graph(g, logger, shorten_uris=True, rename_blank_nodes=True):
 
 def parse_graph(string, logger, fmt="xml"):
     try:
-        return rdflib.Graph().parse(data=string, format=fmt)
+        # the prefixes the cell declares come first: rdflib's Graph() pre-binds well-known prefixes
+        # (schema: to https://schema.org/, ...), which renamed a declared schema: <http://schema.org/>
+        # to schema1: in drawings and tables; rdflib's defaults are added only where they do not clash
+        g = rdflib.Graph(bind_namespaces="core").parse(data=string, format=fmt)
+        for prefix, namespace in rdflib.Graph().namespaces():
+            g.bind(prefix, namespace, override=False)
+        return g
     except Exception as err:
         logger.print(f"Could not parse {fmt} graph:<br>{str(err)}")
         raise StopCellExecution
